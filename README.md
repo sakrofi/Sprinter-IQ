@@ -124,18 +124,6 @@ Tracking extracts the athlete's pixel coordinates per frame. Calibration convert
 **Job state kept separate from queue state.** Redis Streams tracks delivery and acknowledgement, whether a job has been picked up and acked, which is a queueing concern. Postgres tracks an explicit status column (pending, processing, completed, failed) plus the actual results, which is an outcome concern. These are related but distinct: Redis answers whether a job has been picked up, Postgres answers what happened and what the results were. There is no return path through Redis; the client polls Go, Go reads the result from Postgres, and Go returns it to the client.
  
 
-## Current deployment
-
-The application currently runs as a multi-container Docker Compose environment:
-
-- React
-- Go API
-- Redis
-- PostgreSQL
-- Python workers
-
-Keeping these services independent allows the deployment model to evolve later without changing the application architecture.
-
 ## Roadmap
 
 **Phase 1**
